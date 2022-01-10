@@ -2,12 +2,12 @@ namespace mvdictionary;
 
 public class CommandLineParser
 {
-    private IMultiValueDictionary _dictionary;
+    private IMultiValueDictionary<string> _dictionary;
     public string Command { get; set; } = string.Empty;
     public string Arg1 { get; set; } = string.Empty;
     public string Arg2 { get; set; } = string.Empty;
 
-    public CommandLineParser(IMultiValueDictionary dictionary)
+    public CommandLineParser(IMultiValueDictionary<string> dictionary)
     {
         _dictionary = dictionary;
 
@@ -35,7 +35,11 @@ public class CommandLineParser
         switch (this.Command)
         {
             case "add":
-                _dictionary.AddItems(this.Arg1, this.Arg2);
+                var added = _dictionary.AddItems(this.Arg1, this.Arg2);
+                if (added)
+                {
+                    Console.WriteLine("Added");
+                }
                 break;
             case "keys":
                 var keys = _dictionary.GetKeys();

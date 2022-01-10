@@ -13,7 +13,7 @@ public class MultiValueDictionaryTests
     public void MultiValueDictionary_AddShouldAddItem()
     {
         // Given
-        var dictionary = new MultiValueDictionary();
+        var dictionary = new MultiValueDictionary<string>();
         
         dictionary.AddItems("danny","me");
         dictionary.AddItems("danny","you");
@@ -25,7 +25,7 @@ public class MultiValueDictionaryTests
     public void MultiValueDictionary_AddShouldNotAddDuplicate()
     {
         // Given
-        var dictionary = new MultiValueDictionary();
+        var dictionary = new MultiValueDictionary<string>();
         
         dictionary.AddItems("danny","me");
         dictionary.AddItems("danny","me");
@@ -40,7 +40,7 @@ public class MultiValueDictionaryTests
     public void MultiValueDictionary_AddShouldRespectCasingOnValues()
     {
         // Given
-        var dictionary = new MultiValueDictionary();
+        var dictionary = new MultiValueDictionary<string>();
         var parser = new CommandLineParser(dictionary);
         
         dictionary.AddItems("danny","me");
@@ -54,7 +54,7 @@ public class MultiValueDictionaryTests
     public void MultiValueDictionary_GetKeysShouldReturnEmptyArrayInitially()
     {
         // Given
-        var dictionary = new MultiValueDictionary();
+        var dictionary = new MultiValueDictionary<string>();
 
         var keys = dictionary.GetKeys();
 
@@ -65,7 +65,7 @@ public class MultiValueDictionaryTests
     public void MultiValueDictionary_GetKeysShouldReturnKeys()
     {
         // Given
-        var dictionary = new MultiValueDictionary();
+        var dictionary = new MultiValueDictionary<string>();
 
         dictionary.AddItems("danny","me");
         dictionary.AddItems("danny","ME");
@@ -79,7 +79,7 @@ public class MultiValueDictionaryTests
     public void MultiValueDictionary_GetMembersShouldReturnEmpty()
     {
         // Given
-        var dictionary = new MultiValueDictionary();
+        var dictionary = new MultiValueDictionary<string>();
 
         dictionary.AddItems("danny","me");
         dictionary.AddItems("danny","ME");
@@ -92,7 +92,7 @@ public class MultiValueDictionaryTests
     public void MultiValueDictionary_GetMembersShouldReturnMembers()
     {
         // Given
-        var dictionary = new MultiValueDictionary();
+        var dictionary = new MultiValueDictionary<string>();
 
         dictionary.AddItems("danny","me");
         dictionary.AddItems("danny","ME");

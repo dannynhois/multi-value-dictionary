@@ -5,12 +5,12 @@ namespace mvdictionary.test;
 
 public class CommandLineParserTests
 {
-    private Mock<IMultiValueDictionary> _dictionary;
+    private Mock<IMultiValueDictionary<string>> _dictionary;
     
     [SetUp]
     public void Setup()
     {
-        _dictionary = new Mock<IMultiValueDictionary>();
+        _dictionary = new Mock<IMultiValueDictionary<string>>();
     }
     
     [Test]

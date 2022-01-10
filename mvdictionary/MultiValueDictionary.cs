@@ -1,23 +1,22 @@
 namespace mvdictionary;
 
-public interface IMultiValueDictionary
+public interface IMultiValueDictionary<T>
 {
-    void AddItems(string key, string value);
+    bool AddItems(string key, T value);
     string[] GetKeys();
-    string[] GetMembers(string key);
+    T[] GetMembers(string key);
 }
 
-public class MultiValueDictionary : IMultiValueDictionary
+public class MultiValueDictionary<T> : IMultiValueDictionary<T>
 {
-    public Dictionary<string, HashSet<string>> Items { get; } = new Dictionary<string, HashSet<string>>();
+    public Dictionary<string, HashSet<T>> Items { get; } = new Dictionary<string, HashSet<T>>();
 
-    public void AddItems(string key, string value)
+    public bool AddItems(string key, T value)
     {
         if (!Items.ContainsKey(key))
         {
-            var hash = new HashSet<string>() { value };
+            var hash = new HashSet<T>() { value };
             Items.Add(key,hash);
-            Console.WriteLine("Added");
         }
         else
         {
@@ -26,13 +25,12 @@ public class MultiValueDictionary : IMultiValueDictionary
             if (!added)
             {
                 Console.WriteLine("ERROR, member already exists for key");
-                return;
+                return false;
             }
-            else
-            {
-                Console.WriteLine("Added");
-            }
+
         }
+
+        return true;
 
     }
 
@@ -44,15 +42,15 @@ public class MultiValueDictionary : IMultiValueDictionary
         }
         return Items.Keys.ToArray();
     }
-    public string[] GetMembers(string key)
+    public T[] GetMembers(string key)
     {
         if (!Items.ContainsKey(key))
         {
             Console.WriteLine("ERROR, key doesn't exist");
-            return Array.Empty<string>();
+            return Array.Empty<T>();
         }
 
-        var results = Items[key] ?? new HashSet<string>();
+        var results = Items[key] ?? new HashSet<T>();
         return results.ToArray();
     }
 }

@@ -5,7 +5,7 @@ using mvdictionary;
 // dependency injection
 var services = new ServiceCollection();
 var serviceProvider = services
-    .AddSingleton<MultiValueDictionary, MultiValueDictionary>()
+    .AddSingleton<IMultiValueDictionary<string>, MultiValueDictionary<string>>()
     .AddTransient<CommandLineParser>()
     .BuildServiceProvider();
 
