@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mvdictionary", "mvdictionary\mvdictionary.csproj", "{66F298AD-DF74-4F04-91CF-EE5BFECBACB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mvdictionary.test", "mvdictionary.test\mvdictionary.test.csproj", "{77D84F81-A535-4B87-87D6-C7A81EAB5061}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66F298AD-DF74-4F04-91CF-EE5BFECBACB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66F298AD-DF74-4F04-91CF-EE5BFECBACB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66F298AD-DF74-4F04-91CF-EE5BFECBACB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66F298AD-DF74-4F04-91CF-EE5BFECBACB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77D84F81-A535-4B87-87D6-C7A81EAB5061}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77D84F81-A535-4B87-87D6-C7A81EAB5061}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77D84F81-A535-4B87-87D6-C7A81EAB5061}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77D84F81-A535-4B87-87D6-C7A81EAB5061}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
