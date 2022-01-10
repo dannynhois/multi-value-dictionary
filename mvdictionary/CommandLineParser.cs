@@ -42,8 +42,7 @@ public class CommandLineParser
                 }
                 break;
             case "remove":
-                var removed = _dictionary.RemoveItem(this.Arg1, this.Arg2);
-                if (removed)
+                if (_dictionary.RemoveItem(this.Arg1, this.Arg2))
                 {
                     Console.WriteLine("Removed");
                 }
@@ -52,6 +51,12 @@ public class CommandLineParser
                 if (_dictionary.RemoveAllItem(this.Arg1))
                 {
                     Console.WriteLine("Removed");
+                }
+                break;
+            case "clear":
+                if (_dictionary.Clear())
+                {
+                    Console.WriteLine("Cleared");
                 }
                 break;
             case "keys":

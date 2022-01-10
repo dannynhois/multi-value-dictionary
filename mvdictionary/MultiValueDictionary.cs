@@ -7,6 +7,7 @@ public interface IMultiValueDictionary<T>
     bool RemoveAllItem(string key);
     string[] GetKeys();
     T[] GetMembers(string key);
+    bool Clear();
 }
 
 public class MultiValueDictionary<T> : IMultiValueDictionary<T>
@@ -85,5 +86,11 @@ public class MultiValueDictionary<T> : IMultiValueDictionary<T>
 
         var results = Items[key] ?? new HashSet<T>();
         return results.ToArray();
+    }
+
+    public bool Clear()
+    {
+        Items.Clear();
+        return true;
     }
 }

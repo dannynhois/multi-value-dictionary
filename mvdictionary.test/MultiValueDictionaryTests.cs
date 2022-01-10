@@ -167,4 +167,25 @@ public class MultiValueDictionaryTests
         keys = dictionary.GetKeys();
         Assert.IsEmpty(keys);
     }
+    
+    [Test]
+    public void MultiValueDictionary_ClearShouldRemoveAllValues()
+    {
+        // Given
+        var dictionary = new MultiValueDictionary<string>();
+
+        dictionary.AddItem("foo","bar");
+        dictionary.AddItem("foo","baz");
+        dictionary.AddItem("bang","zip");
+        var keys = dictionary.GetKeys();
+        Assert.IsNotEmpty(keys);
+        var cleared = dictionary.Clear();
+        Assert.AreEqual(true, cleared);
+        
+        keys = dictionary.GetKeys();
+        Assert.IsEmpty(keys);
+        
+        cleared = dictionary.Clear();
+        Assert.AreEqual(true, cleared);
+    }
 }
