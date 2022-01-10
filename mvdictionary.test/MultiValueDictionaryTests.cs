@@ -132,4 +132,39 @@ public class MultiValueDictionaryTests
         var expected = new string[] { "me", "ME" };
         Assert.AreEqual(expected, members);
     }
+    [Test]
+    public void MultiValueDictionary_RemoveItemShouldReturnFalseWithWithDuplicateValues()
+    {
+        // Given
+        var dictionary = new MultiValueDictionary<string>();
+
+        dictionary.AddItem("danny","me");
+        dictionary.AddItem("danny","ME");
+        var removed = dictionary.RemoveItem("danny", "me");
+        Assert.AreEqual(true, removed);
+        removed = dictionary.RemoveItem("danny", "me");
+        Assert.AreEqual(false, removed);
+        
+    }
+    
+    [Test]
+    public void MultiValueDictionary_RemoveAllItemShouldReturnTrue()
+    {
+        // Given
+        var dictionary = new MultiValueDictionary<string>();
+
+        dictionary.AddItem("foo","bar");
+        dictionary.AddItem("foo","baz");
+        var keys = dictionary.GetKeys();
+        Assert.IsNotEmpty(keys);
+        var removed = dictionary.RemoveAllItem("foo");
+        Assert.AreEqual(true, removed);
+        
+        var members = dictionary.GetMembers("foo");
+        var expected = new string[] { };
+        Assert.AreEqual(expected, members);
+        
+        keys = dictionary.GetKeys();
+        Assert.IsEmpty(keys);
+    }
 }

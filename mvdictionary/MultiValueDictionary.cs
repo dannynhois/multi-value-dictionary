@@ -4,6 +4,7 @@ public interface IMultiValueDictionary<T>
 {
     bool AddItem(string key, T value);
     bool RemoveItem(string key, T value);
+    bool RemoveAllItem(string key);
     string[] GetKeys();
     T[] GetMembers(string key);
 }
@@ -47,6 +48,20 @@ public class MultiValueDictionary<T> : IMultiValueDictionary<T>
         {
             Console.WriteLine("ERROR, member doesn't exist");
         }
+
+        return removed;
+
+    }
+    
+    public bool RemoveAllItem(string key)
+    {
+        if (!Items.ContainsKey(key))
+        {
+            Console.WriteLine("ERROR, key doesn't exist");
+            return false;
+        }
+
+        var removed = Items.Remove(key);
 
         return removed;
 
