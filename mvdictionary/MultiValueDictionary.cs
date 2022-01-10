@@ -3,6 +3,7 @@ namespace mvdictionary;
 public interface IMultiValueDictionary<T>
 {
     bool AddItems(string key, T value);
+    bool RemoveItem(string key, T value);
     string[] GetKeys();
     T[] GetMembers(string key);
 }
@@ -31,6 +32,23 @@ public class MultiValueDictionary<T> : IMultiValueDictionary<T>
         }
 
         return true;
+
+    }
+    public bool RemoveItem(string key, T value)
+    {
+        if (!Items.ContainsKey(key))
+        {
+            Console.WriteLine("ERROR, key doesn't exist");
+            return false;
+        }
+
+        var removed = Items[key].Remove(value);
+        if (!removed)
+        {
+            Console.WriteLine("ERROR, member doesn't exist");
+        }
+
+        return removed;
 
     }
 

@@ -41,6 +41,13 @@ public class CommandLineParser
                     Console.WriteLine("Added");
                 }
                 break;
+            case "remove":
+                var removed = _dictionary.AddItems(this.Arg1, this.Arg2);
+                if (removed)
+                {
+                    Console.WriteLine("Removed");
+                }
+                break;
             case "keys":
                 var keys = _dictionary.GetKeys();
                 if (keys.Length > 0)
