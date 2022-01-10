@@ -15,8 +15,8 @@ public class MultiValueDictionaryTests
         // Given
         var dictionary = new MultiValueDictionary<string>();
         
-        dictionary.AddItems("danny","me");
-        dictionary.AddItems("danny","you");
+        dictionary.AddItem("danny","me");
+        dictionary.AddItem("danny","you");
         
         Assert.IsTrue(dictionary.Items.ContainsKey("danny"));
         Assert.IsTrue(dictionary.Items["danny"].Count == 2);
@@ -27,9 +27,9 @@ public class MultiValueDictionaryTests
         // Given
         var dictionary = new MultiValueDictionary<string>();
         
-        dictionary.AddItems("danny","me");
-        dictionary.AddItems("danny","me");
-        dictionary.AddItems("john","me");
+        dictionary.AddItem("danny","me");
+        dictionary.AddItem("danny","me");
+        dictionary.AddItem("john","me");
         
         Assert.IsTrue(dictionary.Items.ContainsKey("danny"));
         Assert.IsTrue(dictionary.Items["danny"].Count == 1);
@@ -43,8 +43,8 @@ public class MultiValueDictionaryTests
         var dictionary = new MultiValueDictionary<string>();
         var parser = new CommandLineParser(dictionary);
         
-        dictionary.AddItems("danny","me");
-        dictionary.AddItems("danny","ME");
+        dictionary.AddItem("danny","me");
+        dictionary.AddItem("danny","ME");
 
         Assert.IsTrue(dictionary.Items.ContainsKey("danny"));
         Assert.IsTrue(dictionary.Items["danny"].Count == 2);
@@ -67,9 +67,9 @@ public class MultiValueDictionaryTests
         // Given
         var dictionary = new MultiValueDictionary<string>();
 
-        dictionary.AddItems("danny","me");
-        dictionary.AddItems("danny","ME");
-        dictionary.AddItems("john","me");
+        dictionary.AddItem("danny","me");
+        dictionary.AddItem("danny","ME");
+        dictionary.AddItem("john","me");
         var keys = dictionary.GetKeys();
         var expected = new string[] { "danny", "john" };
 
@@ -81,9 +81,9 @@ public class MultiValueDictionaryTests
         // Given
         var dictionary = new MultiValueDictionary<string>();
 
-        dictionary.AddItems("danny","me");
-        dictionary.AddItems("danny","ME");
-        dictionary.AddItems("john","me");
+        dictionary.AddItem("danny","me");
+        dictionary.AddItem("danny","ME");
+        dictionary.AddItem("john","me");
         var members = dictionary.GetMembers("david");
         Assert.IsEmpty(members);
     }
@@ -94,9 +94,9 @@ public class MultiValueDictionaryTests
         // Given
         var dictionary = new MultiValueDictionary<string>();
 
-        dictionary.AddItems("danny","me");
-        dictionary.AddItems("danny","ME");
-        dictionary.AddItems("john","me");
+        dictionary.AddItem("danny","me");
+        dictionary.AddItem("danny","ME");
+        dictionary.AddItem("john","me");
         var members = dictionary.GetMembers("danny");
         var expected = new string[] { "me", "ME" };
 
@@ -109,8 +109,8 @@ public class MultiValueDictionaryTests
         // Given
         var dictionary = new MultiValueDictionary<string>();
 
-        dictionary.AddItems("danny","me");
-        dictionary.AddItems("danny","ME");
+        dictionary.AddItem("danny","me");
+        dictionary.AddItem("danny","ME");
         var removed = dictionary.RemoveItem("danny", "me");
         var members = dictionary.GetMembers("danny");
         Assert.AreEqual(true, removed);
@@ -123,8 +123,8 @@ public class MultiValueDictionaryTests
         // Given
         var dictionary = new MultiValueDictionary<string>();
 
-        dictionary.AddItems("danny","me");
-        dictionary.AddItems("danny","ME");
+        dictionary.AddItem("danny","me");
+        dictionary.AddItem("danny","ME");
         var removed = dictionary.RemoveItem("john", "me");
         Assert.AreEqual(false, removed);
         

@@ -35,14 +35,14 @@ public class CommandLineParser
         switch (this.Command)
         {
             case "add":
-                var added = _dictionary.AddItems(this.Arg1, this.Arg2);
+                var added = _dictionary.AddItem(this.Arg1, this.Arg2);
                 if (added)
                 {
                     Console.WriteLine("Added");
                 }
                 break;
             case "remove":
-                var removed = _dictionary.AddItems(this.Arg1, this.Arg2);
+                var removed = _dictionary.AddItem(this.Arg1, this.Arg2);
                 if (removed)
                 {
                     Console.WriteLine("Removed");

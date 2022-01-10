@@ -2,7 +2,7 @@ namespace mvdictionary;
 
 public interface IMultiValueDictionary<T>
 {
-    bool AddItems(string key, T value);
+    bool AddItem(string key, T value);
     bool RemoveItem(string key, T value);
     string[] GetKeys();
     T[] GetMembers(string key);
@@ -12,7 +12,7 @@ public class MultiValueDictionary<T> : IMultiValueDictionary<T>
 {
     public Dictionary<string, HashSet<T>> Items { get; } = new Dictionary<string, HashSet<T>>();
 
-    public bool AddItems(string key, T value)
+    public bool AddItem(string key, T value)
     {
         if (!Items.ContainsKey(key))
         {

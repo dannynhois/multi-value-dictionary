@@ -23,7 +23,7 @@ public class CommandLineParserTests
         parser.SetValues("add danny ME").Parse();
         parser.SetValues("addx danny ME").Parse();
 
-        _dictionary.Verify(x => x.AddItems(It.IsAny<string>(),It.IsAny<string>()),Times.Exactly(2));
+        _dictionary.Verify(x => x.AddItem(It.IsAny<string>(),It.IsAny<string>()),Times.Exactly(2));
     }
     
     [Test]
