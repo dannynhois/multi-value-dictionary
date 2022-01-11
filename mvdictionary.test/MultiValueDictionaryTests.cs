@@ -188,4 +188,65 @@ public class MultiValueDictionaryTests
         cleared = dictionary.Clear();
         Assert.AreEqual(true, cleared);
     }
+    
+    [Test]
+    public void MultiValueDictionary_KeyExistsShouldReturnTrueForValid()
+    {
+        // Given
+        var dictionary = new MultiValueDictionary<string>();
+
+        dictionary.AddItem("foo","bar");
+        dictionary.AddItem("foo","baz");
+        dictionary.AddItem("bang","zip");
+        Assert.AreEqual(true, dictionary.KeyExists("foo"));
+        
+    }
+    
+    [Test]
+    public void MultiValueDictionary_KeyExistsShouldReturnFalseForInvalid()
+    {
+        // Given
+        var dictionary = new MultiValueDictionary<string>();
+
+        dictionary.AddItem("foo","bar");
+        dictionary.AddItem("foo","baz");
+        dictionary.AddItem("bang","zip");
+        Assert.AreEqual(false, dictionary.KeyExists("nope"));
+    }
+    
+    [Test]
+    public void MultiValueDictionary_MemberExistsShouldReturnFalseForInvalidKey()
+    {
+        // Given
+        var dictionary = new MultiValueDictionary<string>();
+
+        dictionary.AddItem("foo","bar");
+        dictionary.AddItem("foo","baz");
+        dictionary.AddItem("bang","zip");
+        Assert.AreEqual(false, dictionary.MemberExists("nope","bar"));
+    }
+    [Test]
+    public void MultiValueDictionary_MemberExistsShouldReturnFalseForInvalidMember()
+    {
+        // Given
+        var dictionary = new MultiValueDictionary<string>();
+
+        dictionary.AddItem("foo","bar");
+        dictionary.AddItem("foo","baz");
+        dictionary.AddItem("bang","zip");
+        Assert.AreEqual(false, dictionary.MemberExists("foo","zip"));
+    }
+    
+    [Test]
+    public void MultiValueDictionary_MemberExistsShouldReturnTrueForValidMember()
+    {
+        // Given
+        var dictionary = new MultiValueDictionary<string>();
+
+        dictionary.AddItem("foo","bar");
+        dictionary.AddItem("foo","baz");
+        dictionary.AddItem("bang","zip");
+        Assert.AreEqual(true, dictionary.MemberExists("foo","bar"));
+    }
+    
 }

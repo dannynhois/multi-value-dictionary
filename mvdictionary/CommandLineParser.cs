@@ -81,6 +81,12 @@ public class CommandLineParser
                     }
                 }
                 break;
+            case "keyexists":
+                Console.WriteLine(_dictionary.KeyExists(this.Arg1));
+                break;
+            case "memberexists":
+                Console.WriteLine(_dictionary.MemberExists(this.Arg1,this.Arg2));
+                break;
             default:
                 Console.WriteLine("Invalid command");
                 break;

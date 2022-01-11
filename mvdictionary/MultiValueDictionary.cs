@@ -8,6 +8,8 @@ public interface IMultiValueDictionary<T>
     string[] GetKeys();
     T[] GetMembers(string key);
     bool Clear();
+    bool KeyExists(string key);
+    bool MemberExists(string key, T value);
 }
 
 public class MultiValueDictionary<T> : IMultiValueDictionary<T>
@@ -92,5 +94,17 @@ public class MultiValueDictionary<T> : IMultiValueDictionary<T>
     {
         Items.Clear();
         return true;
+    }
+
+    public bool KeyExists(string key)
+    {
+        return Items.ContainsKey(key);
+    }
+
+    public bool MemberExists(string key, T value)
+    {
+        if (!KeyExists(key)) return false;
+
+        return Items[key].Contains(value);
     }
 }
