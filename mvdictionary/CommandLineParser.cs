@@ -92,6 +92,17 @@ public class CommandLineParser
                     }
                 }
                 break;
+            case "items":
+                var allItems = _dictionary.GetAllItems();
+                if (allItems.Length > 0)
+                {
+                    foreach (var item in allItems)
+                    {
+                        Console.WriteLine($"{index}) {item}");
+                        index++;
+                    }
+                }
+                break;
             case "keyexists":
                 Console.WriteLine(_dictionary.KeyExists(this.Arg1));
                 break;

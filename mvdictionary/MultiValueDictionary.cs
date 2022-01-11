@@ -11,6 +11,8 @@ public interface IMultiValueDictionary<T>
     bool KeyExists(string key);
     bool MemberExists(string key, T value);
     T[] GetAllMembers();
+    string[] GetAllItems();
+
 }
 
 public class MultiValueDictionary<T> : IMultiValueDictionary<T>
@@ -108,6 +110,24 @@ public class MultiValueDictionary<T> : IMultiValueDictionary<T>
         
         foreach (var entry in Items) {
             results.AddRange(entry.Value.ToList());
+        }
+
+        if (results.Count== 0)
+        {
+            Console.WriteLine("(empty set)");
+        }
+        return results.ToArray();
+    }
+
+    public string[] GetAllItems()
+    {
+        var results = new List<string>();
+        
+        foreach (var entry in Items) {
+            foreach (var member in entry.Value)
+            {
+                results.Add($"{entry.Key}: {member}");
+            }
         }
 
         if (results.Count== 0)
