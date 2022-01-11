@@ -146,6 +146,19 @@ public class MultiValueDictionaryTests
         Assert.AreEqual(false, removed);
         
     }
+    [Test]
+    public void MultiValueDictionary_RemoveItemShouldRemoveKeyIfNoRecords()
+    {
+        // Given
+        var dictionary = new MultiValueDictionary<string>();
+
+        dictionary.AddItem("danny","me");
+        var removed = dictionary.RemoveItem("danny", "me");
+        Assert.AreEqual(true, removed);
+        var keys = dictionary.GetKeys();
+        Assert.IsEmpty(keys);
+        
+    }
     
     [Test]
     public void MultiValueDictionary_RemoveAllItemShouldReturnTrue()

@@ -55,6 +55,11 @@ public class MultiValueDictionary<T> : IMultiValueDictionary<T>
             Console.WriteLine("ERROR, member doesn't exist");
         }
 
+        // remove key if no records
+        if (Items[key].Count == 0)
+        {
+            Items.Remove(key);
+        }
         return removed;
 
     }
