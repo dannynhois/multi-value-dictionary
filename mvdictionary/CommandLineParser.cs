@@ -3,7 +3,7 @@ namespace mvdictionary;
 public class CommandLineParser
 {
     private IMultiValueDictionary<string> _dictionary;
-    public string Command { get; set; } = string.Empty;
+    public Command UserCommand { get; set; }
     public string Arg1 { get; set; } = string.Empty;
     public string Arg2 { get; set; } = string.Empty;
 
@@ -16,7 +16,20 @@ public class CommandLineParser
     public CommandLineParser SetValues(string userInput)
     {
         var split = userInput.Split(" ");
-        Command = split[0].ToLower();
+        var command = split[0];
+        if (command == "quit")
+        {
+            Environment.Exit(0);
+        }
+
+        try
+        {
+            UserCommand = Enum.Parse<Command>(command, true);
+        }
+        catch (ArgumentException e)
+        {
+            UserCommand = Command.InvalidCommand;
+        }
         if (split.Length > 1)
         {
             Arg1 = split[1];
@@ -32,9 +45,9 @@ public class CommandLineParser
     {
         var index = 1;
 
-        switch (this.Command)
+        switch (this.UserCommand)
         {
-            case "add":
+            case Command.Add:
                 if (!HasValidArguments(this.Arg1, this.Arg2, 2)) return;
                 var added = _dictionary.AddItem(this.Arg1, this.Arg2);
                 if (added)
@@ -42,7 +55,7 @@ public class CommandLineParser
                     Console.WriteLine("Added");
                 }
                 break;
-            case "remove":
+            case Command.Remove:
                 if (!HasValidArguments(this.Arg1, this.Arg2, 2)) return;
 
                 if (_dictionary.RemoveItem(this.Arg1, this.Arg2))
@@ -50,7 +63,7 @@ public class CommandLineParser
                     Console.WriteLine("Removed");
                 }
                 break;
-            case "removeall":
+            case Command.RemoveAll:
                 if (!HasValidArguments(this.Arg1, this.Arg2, 1)) return;
 
                 if (_dictionary.RemoveAllItem(this.Arg1))
@@ -58,13 +71,13 @@ public class CommandLineParser
                     Console.WriteLine("Removed");
                 }
                 break;
-            case "clear":
+            case Command.Clear:
                 if (_dictionary.Clear())
                 {
                     Console.WriteLine("Cleared");
                 }
                 break;
-            case "keys":
+            case Command.Keys:
                 var keys = _dictionary.GetKeys();
                 if (keys.Length > 0)
                 {
@@ -75,7 +88,7 @@ public class CommandLineParser
                     }
                 }
                 break;
-            case "members":
+            case Command.Members:
                 if (!HasValidArguments(this.Arg1, this.Arg2, 1)) return;
 
                 var members = _dictionary.GetMembers(this.Arg1);
@@ -88,7 +101,7 @@ public class CommandLineParser
                     }
                 }
                 break;
-            case "allmembers":
+            case Command.AllMembers:
                 var allMembers = _dictionary.GetAllMembers();
                 if (allMembers.Length > 0)
                 {
@@ -99,7 +112,7 @@ public class CommandLineParser
                     }
                 }
                 break;
-            case "items":
+            case Command.Items:
                 var allItems = _dictionary.GetAllItems();
                 if (allItems.Length > 0)
                 {
@@ -110,18 +123,15 @@ public class CommandLineParser
                     }
                 }
                 break;
-            case "keyexists":
+            case Command.KeyExists:
                 if (!HasValidArguments(this.Arg1, this.Arg2, 1)) return;
 
                 Console.WriteLine(_dictionary.KeyExists(this.Arg1));
                 break;
-            case "memberexists":
+            case Command.MemberExists:
                 if (!HasValidArguments(this.Arg1, this.Arg2, 2)) return;
 
                 Console.WriteLine(_dictionary.MemberExists(this.Arg1,this.Arg2));
-                break;
-            case "quit":
-                System.Environment.Exit(0);
                 break;
             default:
                 Console.WriteLine("Invalid command");
