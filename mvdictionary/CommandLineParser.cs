@@ -21,7 +21,6 @@ public class CommandLineParser
         {
             Environment.Exit(0);
         }
-
         try
         {
             UserCommand = Enum.Parse<Command>(command, true);
@@ -43,8 +42,6 @@ public class CommandLineParser
 
     public void Parse()
     {
-        var index = 1;
-
         switch (this.UserCommand)
         {
             case Command.Add:
@@ -57,7 +54,6 @@ public class CommandLineParser
                 break;
             case Command.Remove:
                 if (!HasValidArguments(this.Arg1, this.Arg2, 2)) return;
-
                 if (_dictionary.RemoveItem(this.Arg1, this.Arg2))
                 {
                     Console.WriteLine("Removed");
@@ -79,58 +75,27 @@ public class CommandLineParser
                 break;
             case Command.Keys:
                 var keys = _dictionary.GetKeys();
-                if (keys.Length > 0)
-                {
-                    foreach (var key in keys)
-                    {
-                        Console.WriteLine($"{index}) {key}");
-                        index++;
-                    }
-                }
+                LogList(keys);
                 break;
             case Command.Members:
                 if (!HasValidArguments(this.Arg1, this.Arg2, 1)) return;
-
                 var members = _dictionary.GetMembers(this.Arg1);
-                if (members.Length > 0)
-                {
-                    foreach (var member in members)
-                    {
-                        Console.WriteLine($"{index}) {member}");
-                        index++;
-                    }
-                }
+                LogList(members);
                 break;
             case Command.AllMembers:
                 var allMembers = _dictionary.GetAllMembers();
-                if (allMembers.Length > 0)
-                {
-                    foreach (var member in allMembers)
-                    {
-                        Console.WriteLine($"{index}) {member}");
-                        index++;
-                    }
-                }
+                LogList(allMembers);
                 break;
             case Command.Items:
                 var allItems = _dictionary.GetAllItems();
-                if (allItems.Length > 0)
-                {
-                    foreach (var item in allItems)
-                    {
-                        Console.WriteLine($"{index}) {item}");
-                        index++;
-                    }
-                }
+                LogList(allItems);
                 break;
             case Command.KeyExists:
                 if (!HasValidArguments(this.Arg1, this.Arg2, 1)) return;
-
                 Console.WriteLine(_dictionary.KeyExists(this.Arg1));
                 break;
             case Command.MemberExists:
                 if (!HasValidArguments(this.Arg1, this.Arg2, 2)) return;
-
                 Console.WriteLine(_dictionary.MemberExists(this.Arg1,this.Arg2));
                 break;
             default:
@@ -159,5 +124,18 @@ public class CommandLineParser
         }
 
         return true;
+    }
+
+    private void LogList(string[] items)
+    {
+        var index = 1;
+        if (items.Length > 0)
+        {
+            foreach (var item in items)
+            {
+                Console.WriteLine($"{index}) {item}");
+                index++;
+            }
+        }
     }
 }
