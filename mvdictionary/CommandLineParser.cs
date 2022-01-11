@@ -109,6 +109,9 @@ public class CommandLineParser
             case "memberexists":
                 Console.WriteLine(_dictionary.MemberExists(this.Arg1,this.Arg2));
                 break;
+            case "quit":
+                System.Environment.Exit(0);
+                break;
             default:
                 Console.WriteLine("Invalid command");
                 break;

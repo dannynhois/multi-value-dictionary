@@ -1,4 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
+
+using System.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using mvdictionary;
 
@@ -11,13 +13,18 @@ var serviceProvider = services
 
 Console.WriteLine("Enter a command:");
 Console.Write("> ");
-var input = Console.ReadLine();
 var parser = serviceProvider.GetService<CommandLineParser>();
-parser.SetValues(input).Parse();
+if (parser is null)
+{
+    Console.WriteLine("Error loading parser.");
+    System.Environment.Exit(Environment.ExitCode);
+}
+var input = Console.ReadLine();
+parser.SetValues(input!).Parse();
 
 while (input != "quit")
 {
     Console.Write("> ");
     input = Console.ReadLine();
-    parser.SetValues(input).Parse();
+    parser.SetValues(input!).Parse();
 }
