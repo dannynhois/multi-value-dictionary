@@ -35,6 +35,7 @@ public class CommandLineParser
         switch (this.Command)
         {
             case "add":
+                if (!HasValidArguments(this.Arg1, this.Arg2, 2)) return;
                 var added = _dictionary.AddItem(this.Arg1, this.Arg2);
                 if (added)
                 {
@@ -42,12 +43,16 @@ public class CommandLineParser
                 }
                 break;
             case "remove":
+                if (!HasValidArguments(this.Arg1, this.Arg2, 2)) return;
+
                 if (_dictionary.RemoveItem(this.Arg1, this.Arg2))
                 {
                     Console.WriteLine("Removed");
                 }
                 break;
             case "removeall":
+                if (!HasValidArguments(this.Arg1, this.Arg2, 1)) return;
+
                 if (_dictionary.RemoveAllItem(this.Arg1))
                 {
                     Console.WriteLine("Removed");
@@ -71,6 +76,8 @@ public class CommandLineParser
                 }
                 break;
             case "members":
+                if (!HasValidArguments(this.Arg1, this.Arg2, 1)) return;
+
                 var members = _dictionary.GetMembers(this.Arg1);
                 if (members.Length > 0)
                 {
@@ -104,9 +111,13 @@ public class CommandLineParser
                 }
                 break;
             case "keyexists":
+                if (!HasValidArguments(this.Arg1, this.Arg2, 1)) return;
+
                 Console.WriteLine(_dictionary.KeyExists(this.Arg1));
                 break;
             case "memberexists":
+                if (!HasValidArguments(this.Arg1, this.Arg2, 2)) return;
+
                 Console.WriteLine(_dictionary.MemberExists(this.Arg1,this.Arg2));
                 break;
             case "quit":
@@ -116,5 +127,27 @@ public class CommandLineParser
                 Console.WriteLine("Invalid command");
                 break;
         }
+    }
+    private bool HasValidArguments(string key, string value, int numberOfArgumentsRequired)
+    {
+        if (numberOfArgumentsRequired >= 1)
+        {
+            if (string.IsNullOrEmpty(key))
+            {
+                Console.WriteLine("Invalid command. Please pass in a key with command");
+                return false;
+            }
+        }
+
+        if (numberOfArgumentsRequired == 2)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                Console.WriteLine("Invalid command. Please pass in a value with command");
+                return false;
+            }
+        }
+
+        return true;
     }
 }

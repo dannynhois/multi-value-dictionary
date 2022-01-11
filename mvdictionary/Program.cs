@@ -26,5 +26,11 @@ while (input != "quit")
 {
     Console.Write("> ");
     input = Console.ReadLine();
+    parser = serviceProvider.GetService<CommandLineParser>();
+    if (parser is null)
+    {
+        Console.WriteLine("Error loading parser.");
+        System.Environment.Exit(Environment.ExitCode);
+    }
     parser.SetValues(input!).Parse();
 }
