@@ -249,4 +249,29 @@ public class MultiValueDictionaryTests
         Assert.AreEqual(true, dictionary.MemberExists("foo","bar"));
     }
     
+    [Test]
+    public void MultiValueDictionary_GetAllMembersShouldReturnAllMembers()
+    {
+        // Given
+        var dictionary = new MultiValueDictionary<string>();
+
+        dictionary.AddItem("foo","bar");
+        dictionary.AddItem("foo","baz");
+        dictionary.AddItem("bang","bar");
+        dictionary.AddItem("bang","baz");
+        var expected = new string[] { "bar", "baz", "bar", "baz" };
+        var members = dictionary.GetAllMembers();
+
+        Assert.AreEqual(expected, members);
+    }
+    [Test]
+    public void MultiValueDictionary_GetAllMembersShouldReturnEmpty()
+    {
+        // Given
+        var dictionary = new MultiValueDictionary<string>();
+        var members = dictionary.GetAllMembers();
+
+        Assert.IsEmpty(members);
+    }
+    
 }

@@ -10,6 +10,7 @@ public interface IMultiValueDictionary<T>
     bool Clear();
     bool KeyExists(string key);
     bool MemberExists(string key, T value);
+    T[] GetAllMembers();
 }
 
 public class MultiValueDictionary<T> : IMultiValueDictionary<T>
@@ -99,6 +100,21 @@ public class MultiValueDictionary<T> : IMultiValueDictionary<T>
     public bool KeyExists(string key)
     {
         return Items.ContainsKey(key);
+    }
+
+    public T[] GetAllMembers()
+    {
+        var results = new List<T>();
+        
+        foreach (var entry in Items) {
+            results.AddRange(entry.Value.ToList());
+        }
+
+        if (results.Count== 0)
+        {
+            Console.WriteLine("(empty set)");
+        }
+        return results.ToArray();
     }
 
     public bool MemberExists(string key, T value)
